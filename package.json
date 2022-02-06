@@ -1,0 +1,28 @@
+{
+  "name": "whatsapp-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kedarvijaykulkarni/whatsapp-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kedarvijaykulkarni/whatsapp-bot/issues"
+  },
+  "homepage": "https://github.com/kedarvijaykulkarni/whatsapp-bot#readme",
+  "dependencies": {
+    "@mantium/mantiumapi": "^0.1.4-beta",
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "twilio": "^3.72.0"
+  }
+}
