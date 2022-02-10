@@ -16,6 +16,14 @@ You will need the following things properly installed on your computer.
 
 ## Running / Development
 
+### update the readme file using ManitumAI credentials
+
+to obtain MantiumAI key register your self with  MantiumAI refer [Quick Integration](https://developer.mantiumai.com/docs/quick-integration)
+
+rename the sample.env to .env file in the application, fill the credentails in the .env file
+
+### run the server
+
 - `node server.js`
 - Visit your app at [http://localhost:8000](http://localhost:8000).
 
