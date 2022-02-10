@@ -27,7 +27,6 @@ class Bot {
       .then((response) => {
         // get bearer_id and set as a api_key
         if (response.data?.attributes) {
-          console.log('Login successful!');
           mantiumAi.api_key = response.data.attributes.bearer_id;
           this.apiKey = response.data.attributes.bearer_id;
         } else {
@@ -62,14 +61,8 @@ class Bot {
   apiKey = null;
 
   async postMessage(req, res) {
-    // execute the prompt
-    // res.status(200).send('Hi I am postMessage' + req.body + ' ' + this.apiKey);
-
-    console.log('body ::::', req.body);
 
     let response = await this.getAnswer(req.body.Body);
-
-    console.log('response ::::', response);
 
     const twiml = new MessagingResponse();
 
@@ -79,14 +72,6 @@ class Bot {
 
     // convert response to twillio xml format
     //https://www.twilio.com/docs/sms/tutorials/how-to-receive-and-reply-node-js
-
-    /*if (req.body && req.body.message && response?.output) {
-      twiml.message(response.output);
-      // res.status(200).send('Hi I am postMessage' + response.output);
-    } else {
-      // res.status(200).send('No response from AI ....');
-      twiml.message('No response from AI ....');
-    }*/
 
     res.end(twiml.toString());
   }
