@@ -3,7 +3,7 @@ require('dotenv').config();
 
 // get the mantium Token
 const mantiumAi = require('@mantium/mantiumapi');
-const prompt_id = 'd68207a4-e082-4452-943a-e18cb82fb199';
+const prompt_id = process.env.MANTIUM_PROMPT_ID;
 const credentials = {
   username: process.env.MANTIUM_USER_NAME,
   password: process.env.MANTIUM_PASSWORD,
@@ -61,7 +61,6 @@ class Bot {
   apiKey = null;
 
   async postMessage(req, res) {
-
     let response = await this.getAnswer(req.body.Body);
 
     const twiml = new MessagingResponse();
@@ -70,14 +69,16 @@ class Bot {
 
     twiml.message(response.output);
 
-    // convert response to twillio xml format
-    //https://www.twilio.com/docs/sms/tutorials/how-to-receive-and-reply-node-js
+    /* convert response to twillio xml format
+     * read more...
+     * https://www.twilio.com/docs/sms/tutorials/how-to-receive-and-reply-node-js
+     */
 
     res.end(twiml.toString());
   }
 
   getMessage(req, res) {
-    res.status(200).send('This URL use only for post messge' + this.apiKey);
+    res.status(200).send('HTTP POST method only supported by this endpoint');
   }
 }
 

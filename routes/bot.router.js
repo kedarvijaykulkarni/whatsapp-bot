@@ -7,7 +7,7 @@ const botRoutes = (app) => {
     bot.postMessage(req, res);
   });
 
-  // set default get
+  // set default get to show warning message
   app.get('/bot', (req, res) => bot.getMessage(req, res));
 };
 
