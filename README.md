@@ -20,13 +20,12 @@ You will need the following things properly installed on your computer.
 
 to obtain MantiumAI key register your self with  MantiumAI refer [Quick Integration](https://developer.mantiumai.com/docs/quick-integration)
 
-rename the sample.env to .env file in the application, fill the credentails in the .env file
+rename the sample.env to .env file in the application, fill the credentails in the .env file, add the MANTIUM_PROMPT_ID which need to execute
 
 ### run the server
 
-- `node server.js`
+- `npm start` or `node server.js`
 - Visit your app at [http://localhost:8000](http://localhost:8000).
 
 ## Further Reading / Useful Links
 - [Reading] (https://blessingadesiji.medium.com/build-a-whatsapp-ai-powered-chatbot-with-gpt-3-using-mantium-twilio-api-d4e40b6f0ed9)
-
