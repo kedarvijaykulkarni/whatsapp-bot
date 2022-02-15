@@ -18,15 +18,24 @@ You will need the following things properly installed on your computer.
 
 ### update the readme file using ManitumAI credentials
 
-to obtain MantiumAI key register your self with  MantiumAI refer [Quick Integration](https://developer.mantiumai.com/docs/quick-integration)
+to obtain MantiumAI key register yourself with  MantiumAI refer [Quick Integration](https://developer.mantiumai.com/docs/quick-integration)
 
 ### run the server
 
 - `npm start` or `node server.js`
-rename the sample.env to .env file in the application, fill the credentails in the .env file, add the MANTIUM_PROMPT_ID which need to execute
+rename the sample.env to .env file in the application, fill the credentials in the .env file, add the MANTIUM_PROMPT_ID which need to execute
 
 - Visit your app at [http://localhost:8000](http://localhost:8000).
 
 ## Further Reading / Useful Links
 
-- [Reading](https://blessingadesiji.medium.com/build-a-whatsapp-ai-powered-chatbot-with-gpt-3-using-mantium-twilio-api-d4e40b6f0ed9)
+- [Complete Step By Step Document](https://blessingadesiji.medium.com/build-a-whatsapp-ai-powered-chatbot-with-gpt-3-using-mantium-twilio-api-d4e40b6f0ed9)
+- https://mantiumai.com/
+- https://developer.mantiumai.com/docs/quick-integration
+- https://developer.mantiumai.com/docs/getting-started
+
+## Git Repository for MantiumAI library
+- https://github.com/mantiumai/mantiumclient-js
+
+## NPM Package for MantiumAI library
+- https://www.npmjs.com/package/@mantium/mantiumapi
