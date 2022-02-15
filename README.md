@@ -29,4 +29,4 @@ rename the sample.env to .env file in the application, fill the credentails in t
 
 ## Further Reading / Useful Links
 
-- [Reading] (https://blessingadesiji.medium.com/build-a-whatsapp-ai-powered-chatbot-with-gpt-3-using-mantium-twilio-api-d4e40b6f0ed9)
+- [Reading](https://blessingadesiji.medium.com/build-a-whatsapp-ai-powered-chatbot-with-gpt-3-using-mantium-twilio-api-d4e40b6f0ed9)
