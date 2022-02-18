@@ -8,9 +8,8 @@ const credentials = {
   username: process.env.MANTIUM_USER_NAME,
   password: process.env.MANTIUM_PASSWORD,
 };
-const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
-class Bot {
+class chromeExtension {
   /****************************************************************************************************
    Constructor
   *******************************************************************************************************/
@@ -61,20 +60,10 @@ class Bot {
   apiKey = null;
 
   async postMessage(req, res) {
-    let response = await this.getAnswer(req.body.Body);
-
-    const twiml = new MessagingResponse();
-
-    res.writeHead(200, { 'Content-Type': 'text/xml' });
-
-    twiml.message(response?.output || response);
-
-    /* convert response to twillio xml format
-     * read more...
-     * https://www.twilio.com/docs/sms/tutorials/how-to-receive-and-reply-node-js
-     */
-
-    res.end(twiml.toString());
+    const response = await this.getAnswer(req.body.message);
+    res.writeHead(200, { 'Content-Type': 'text/json' });
+    // res.end(JSON.stringify(response));
+    res.end(response?.output.toString() || 'Response faild!');
   }
 
   getMessage(req, res) {
@@ -82,4 +71,4 @@ class Bot {
   }
 }
 
-module.exports = Bot;
+module.exports = chromeExtension;

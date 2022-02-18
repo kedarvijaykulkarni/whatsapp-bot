@@ -25,5 +25,5 @@ app.all('/*', function (req, res, next) {
 const routes = require('./routes/routes.js')(app);
 
 const server = app.listen(process.env.PORT || 8000, () => {
-  console.log('listening on port %s...', server.address().port);
+  console.log('listening server http://localhost:%s', server.address().port);
 });
