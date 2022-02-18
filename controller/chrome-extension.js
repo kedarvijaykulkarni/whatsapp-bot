@@ -61,9 +61,9 @@ class chromeExtension {
 
   async postMessage(req, res) {
     const response = await this.getAnswer(req.body.message);
-    res.writeHead(200, { 'Content-Type': 'text/json' });
-    // res.end(JSON.stringify(response));
-    res.end(response?.output.toString() || 'Response faild!');
+    /* WORKING */
+    // res.end(response?.output.toString() || 'Response faild!');
+    res.status(200).send(response);
   }
 
   getMessage(req, res) {
