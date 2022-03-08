@@ -34,11 +34,14 @@ class chromeExtension {
       });
   }
 
-  async getAnswer(question) {
+  async getAnswer(body) {
+    let question = body.message;
+    let promptId = body.prompt_id || prompt_id;
+
     return await mantiumAi
       .Prompts('OpenAI')
       .execute({
-        id: prompt_id,
+        id: promptId,
         input: question,
       })
       .then(async (res) => {
@@ -60,7 +63,7 @@ class chromeExtension {
   apiKey = null;
 
   async postMessage(req, res) {
-    const response = await this.getAnswer(req.body.message);
+    const response = await this.getAnswer(req.body);
     /* WORKING */
     // res.end(response?.output.toString() || 'Response faild!');
     res.status(200).send(response);
