@@ -1,15 +1,14 @@
-'use strict';
-require('dotenv').config();
+import {} from 'dotenv/config'
 
-// get the mantium Token
-const mantiumAi = require('@mantium/mantiumapi');
+import mantiumAi from '@mantium/mantiumapi';
+
 const prompt_id = process.env.MANTIUM_PROMPT_ID;
 const credentials = {
   username: process.env.MANTIUM_USER_NAME,
   password: process.env.MANTIUM_PASSWORD,
 };
 
-class chromeExtension {
+export class  chromeExtension {
   /****************************************************************************************************
    Constructor
   *******************************************************************************************************/
@@ -74,4 +73,3 @@ class chromeExtension {
   }
 }
 
-module.exports = chromeExtension;

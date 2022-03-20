@@ -1,7 +1,7 @@
-let chromeController = require('./../controller/chrome-extension.js');
-let chrome = new chromeController();
+import { chromeExtension } from './../controller/chrome-extension.js';
+let chrome = new chromeExtension();
 
-const chromeExtensionRoutes = (app) => {
+export default function chromeExtensionRoutes (app) {
   // send message
   app.post('/chrome-extension', (req, res) => {
     chrome.postMessage(req, res);
@@ -9,6 +9,4 @@ const chromeExtensionRoutes = (app) => {
 
   // set default get to show warning message
   app.get('/chrome-extension', (req, res) => chrome.getMessage(req, res));
-};
-
-module.exports = chromeExtensionRoutes;
+}

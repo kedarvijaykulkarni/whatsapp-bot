@@ -1,16 +1,15 @@
 import {} from 'dotenv/config'
 
+import { TwitterApi } from 'twitter-api-v2';
 import mantiumAi from '@mantium/mantiumapi';
-import twilio from 'twilio';
 
-const prompt_id = process.env.MANTIUM_PROMPT_ID;
+const prompt_id = process.env.MANTIUM_TWITTER_PROMPT_ID;
 const credentials = {
   username: process.env.MANTIUM_USER_NAME,
   password: process.env.MANTIUM_PASSWORD,
 };
-const MessagingResponse = twilio.twiml.MessagingResponse;
 
-export class Bot {
+export class Twitter {
   /****************************************************************************************************
    Constructor
   *******************************************************************************************************/
@@ -21,8 +20,7 @@ export class Bot {
   }
 
   async getToken() {
-    await mantiumAi
-      .Auth()
+    await mantiumAi.Auth()
       .accessTokenLogin({ ...credentials })
       .then((response) => {
         // get bearer_id and set as a api_key
@@ -35,12 +33,12 @@ export class Bot {
       });
   }
 
-  async getAnswer(question) {
-    return await mantiumAi
-      .Prompts('OpenAI')
+  async getAnswer() {
+    // const providers = ["openai", "cohere", "mantium", "OpenAI", "Cohere", "Mantium"];
+    return await mantiumAi.Prompts('Cohere')
       .execute({
         id: prompt_id,
-        input: question,
+        input: ''
       })
       .then(async (res) => {
         /*
@@ -48,8 +46,7 @@ export class Bot {
          * and then pass this to the result method
          */
         if (res?.prompt_execution_id) {
-          return await mantiumAi
-            .Prompts('OpenAI')
+          return await mantiumAi.Prompts('Cohere')
             .result(res.prompt_execution_id)
             .then((response) => {
               return response;
@@ -60,24 +57,27 @@ export class Bot {
 
   apiKey = null;
 
-  async postMessage(req, res) {
-    let response = await this.getAnswer(req.body.Body);
+  async getMessage(req, res) {
+    let response = await this.getAnswer();
 
-    const twiml = new MessagingResponse();
+    if(response && response.output) {
+      const client = new TwitterApi({
+        appKey: process.env.TWITTER_APP_KEY,
+        appSecret: process.env.TWITTER_APP_SECRET,
+        accessToken: process.env.TWITTER_ACCESS_TOKEN,
+        accessSecret: process.env.TWITTER_ACCESS_SECRET,
+      });
 
-    res.writeHead(200, { 'Content-Type': 'text/xml' });
+      const rwClient = client.readWrite;
 
-    twiml.message(response?.output || response);
-
-    /* convert response to twillio xml format
-     * read more...
-     * https://www.twilio.com/docs/sms/tutorials/how-to-receive-and-reply-node-js
-     */
-
-    res.end(twiml.toString());
-  }
-
-  getMessage(req, res) {
-    res.status(200).send('HTTP POST method only supported by this endpoint');
+      await rwClient.v1.tweet(response.output).then((val) => {
+          console.log(val)
+          console.log("success")
+      }).catch((err) => {
+          console.log(err)
+          console.log(err.data.errors)
+      });
+    }
+    res.status(200).send(response);
   }
 }

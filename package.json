@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node --trace-warnings server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kedarvijaykulkarni/whatsapp-bot.git"
@@ -19,11 +20,12 @@
   },
   "homepage": "https://github.com/kedarvijaykulkarni/whatsapp-bot#readme",
   "dependencies": {
-    "@mantium/mantiumapi": "^0.1.4-beta",
+    "@mantium/mantiumapi": "^0.1.5-beta",
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
-    "twilio": "^3.72.0"
+    "twilio": "^3.72.0",
+    "twitter-api-v2": "^1.11.0"
   }
 }

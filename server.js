@@ -1,7 +1,13 @@
-require('dotenv').config();
-const cors = require('cors');
-const express = require('express');
-const bodyParser = require('body-parser');
+import {} from 'dotenv/config'
+
+import appRouter from "./routes/routes.js";
+import bodyParser from "body-parser";
+import cors from "cors";
+import express from "express";
+
+// const cors = require('cors');
+// const express = require('express');
+// const bodyParser = require('body-parser');
 const app = express();
 
 app.use(cors());
@@ -22,7 +28,7 @@ app.all('/*', function (req, res, next) {
   next();
 });
 
-const routes = require('./routes/routes.js')(app);
+appRouter(app);
 
 const server = app.listen(process.env.PORT || 8000, () => {
   console.log('listening server http://localhost:%s', server.address().port);

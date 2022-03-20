@@ -1,16 +1,20 @@
-const appRouter = (app) => {
+import botRoutes from './bot.router.js';
+import chromeExtensionRoutes from './chrome-extension.router.js';
+import twitterBotRoutes from './twitter-bot.router.js';
+
+export default function appRouter(app) {
   // default route
   app.get('/', (req, res) => {
-    res.send('Welcome to Mantium WhatsApp Bot!');
+    res.send('Welcome to Mantium Bot!');
   });
 
   // import other routes
-  const botRoutes = require('./bot.router');
   botRoutes(app);
 
   // import other routes
-  const chromeExtensionRoutes = require('./chrome-extension.router');
   chromeExtensionRoutes(app);
-};
 
-module.exports = appRouter;
+  // import other routes
+  twitterBotRoutes(app);
+
+};
