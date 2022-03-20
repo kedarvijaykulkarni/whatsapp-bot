@@ -16,5 +16,4 @@ export default function appRouter(app) {
 
   // import other routes
   twitterBotRoutes(app);
-
-};
+}

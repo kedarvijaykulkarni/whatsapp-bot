@@ -1,7 +1,7 @@
 import { chromeExtension } from './../controller/chrome-extension.js';
 let chrome = new chromeExtension();
 
-export default function chromeExtensionRoutes (app) {
+export default function chromeExtensionRoutes(app) {
   // send message
   app.post('/chrome-extension', (req, res) => {
     chrome.postMessage(req, res);

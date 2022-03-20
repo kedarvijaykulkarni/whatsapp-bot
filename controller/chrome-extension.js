@@ -1,4 +1,4 @@
-import {} from 'dotenv/config'
+import {} from 'dotenv/config';
 
 import mantiumAi from '@mantium/mantiumapi';
 
@@ -8,7 +8,7 @@ const credentials = {
   password: process.env.MANTIUM_PASSWORD,
 };
 
-export class  chromeExtension {
+export class chromeExtension {
   /****************************************************************************************************
    Constructor
   *******************************************************************************************************/
@@ -72,4 +72,3 @@ export class  chromeExtension {
     res.status(200).send('HTTP POST method only supported by this endpoint');
   }
 }
-

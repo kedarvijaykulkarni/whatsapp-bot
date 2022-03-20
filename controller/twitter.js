@@ -1,4 +1,4 @@
-import {} from 'dotenv/config'
+import {} from 'dotenv/config';
 
 import { TwitterApi } from 'twitter-api-v2';
 import mantiumAi from '@mantium/mantiumapi';
@@ -20,7 +20,8 @@ export class Twitter {
   }
 
   async getToken() {
-    await mantiumAi.Auth()
+    await mantiumAi
+      .Auth()
       .accessTokenLogin({ ...credentials })
       .then((response) => {
         // get bearer_id and set as a api_key
@@ -35,10 +36,11 @@ export class Twitter {
 
   async getAnswer() {
     // const providers = ["openai", "cohere", "mantium", "OpenAI", "Cohere", "Mantium"];
-    return await mantiumAi.Prompts('Cohere')
+    return await mantiumAi
+      .Prompts('Cohere')
       .execute({
         id: prompt_id,
-        input: ''
+        input: '',
       })
       .then(async (res) => {
         /*
@@ -46,7 +48,8 @@ export class Twitter {
          * and then pass this to the result method
          */
         if (res?.prompt_execution_id) {
-          return await mantiumAi.Prompts('Cohere')
+          return await mantiumAi
+            .Prompts('Cohere')
             .result(res.prompt_execution_id)
             .then((response) => {
               return response;
@@ -60,7 +63,7 @@ export class Twitter {
   async getMessage(req, res) {
     let response = await this.getAnswer();
 
-    if(response && response.output) {
+    if (response && response.output) {
       const client = new TwitterApi({
         appKey: process.env.TWITTER_APP_KEY,
         appSecret: process.env.TWITTER_APP_SECRET,
@@ -70,13 +73,16 @@ export class Twitter {
 
       const rwClient = client.readWrite;
 
-      await rwClient.v1.tweet(response.output).then((val) => {
-          console.log(val)
-          console.log("success")
-      }).catch((err) => {
-          console.log(err)
-          console.log(err.data.errors)
-      });
+      await rwClient.v1
+        .tweet(response.output)
+        .then((val) => {
+          console.log(val);
+          console.log('success');
+        })
+        .catch((err) => {
+          console.log(err);
+          console.log(err.data.errors);
+        });
     }
     res.status(200).send(response);
   }

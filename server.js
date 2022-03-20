@@ -1,13 +1,12 @@
-import {} from 'dotenv/config'
+import {} from 'dotenv/config';
 
-import appRouter from "./routes/routes.js";
-import bodyParser from "body-parser";
-import cors from "cors";
-import express from "express";
+import appRouter from './routes/routes.js';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import cron from 'cron';
+import express from 'express';
+import request from 'request';
 
-// const cors = require('cors');
-// const express = require('express');
-// const bodyParser = require('body-parser');
 const app = express();
 
 app.use(cors());
@@ -33,3 +32,35 @@ appRouter(app);
 const server = app.listen(process.env.PORT || 8000, () => {
   console.log('listening server http://localhost:%s', server.address().port);
 });
+
+/*
+ * CronJob for Twitter
+ */
+
+const CronJob = cron.CronJob;
+
+const tweet = async () => {
+  try {
+    await request('http://localhost:3000/twitter');
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+/*
+ * CronJob("* * * * * *")
+ * CronJob(seconds, minits, hours, day, month, year)
+ *
+ * for every monring 5 AM then setting would be like
+ * CronJob("0 5 * * *")
+ *
+ * for every minute then setting would be like
+ * CronJob("* * * * *")
+ */
+
+const job = new CronJob('0 5 * * *', () => {
+  tweet();
+});
+
+// this will start the cron job
+job.start();

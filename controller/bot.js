@@ -1,4 +1,4 @@
-import {} from 'dotenv/config'
+import {} from 'dotenv/config';
 
 import mantiumAi from '@mantium/mantiumapi';
 import twilio from 'twilio';
