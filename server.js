@@ -41,7 +41,7 @@ const CronJob = cron.CronJob;
 
 const tweet = async () => {
   try {
-    await request('http://localhost:3000/twitter');
+    await request(process.env.TWITTER_URL_RELOAD);
   } catch (e) {
     console.log(e);
   }
